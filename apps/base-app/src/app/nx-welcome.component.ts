@@ -427,7 +427,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
         }
       }
     </style>
-    <div class="wrapper">
+    <div class="wrapper w-full">
       <div class="container">
         <!--  WELCOME  -->
         <div id="welcome">
