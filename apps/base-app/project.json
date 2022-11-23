@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/base-app",
         "index": "apps/base-app/src/index.html",
@@ -15,8 +17,13 @@
         "polyfills": "apps/base-app/src/polyfills.ts",
         "tsConfig": "apps/base-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/base-app/src/favicon.ico", "apps/base-app/src/assets"],
-        "styles": ["apps/base-app/src/styles.scss"],
+        "assets": [
+          "apps/base-app/src/favicon.ico",
+          "apps/base-app/src/assets"
+        ],
+        "styles": [
+          "apps/base-app/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -62,7 +69,25 @@
           "browserTarget": "base-app:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/base-app/proxy.conf.js"
+      }
+    },
+    "serve_mock": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "base-app:build:production"
+        },
+        "development": {
+          "browserTarget": "base-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/base-app/proxy-mock.conf.js"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -73,12 +98,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/base-app/**/*.ts", "apps/base-app/**/*.html"]
+        "lintFilePatterns": [
+          "apps/base-app/**/*.ts",
+          "apps/base-app/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/base-app"],
+      "outputs": [
+        "coverage/apps/base-app"
+      ],
       "options": {
         "jestConfig": "apps/base-app/jest.config.ts",
         "passWithNoTests": true
