@@ -1,24 +1,61 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nrwl/nx",
+    "prettier",
+    "deprecation",
+    "eslint-plugin-prefer-arrow",
+    "eslint-plugin-import",
+    "eslint-plugin-jsdoc"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
-        "project": ["./tsconfig.*?.json"],
+        "project": [
+          "./tsconfig.*?.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
         "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:jsdoc/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "deprecation/deprecation": "warn",
+        "prefer-arrow/prefer-arrow-functions": [
+          "error",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": true,
+            "classPropertiesAllowed": false,
+            "allowStandaloneDeclarations": true
+          }
+        ],
+        "complexity": [
+          "error",
+          {
+            "max": 7
+          }
+        ],
+        "jsdoc/check-alignment": "error",
+        "jsdoc/no-types": "error",
+        "jsdoc/require-returns": "warn",
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -27,7 +64,9 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
               }
             ]
           }
@@ -35,7 +74,10 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": ["element", "attribute"],
+            "type": [
+              "element",
+              "attribute"
+            ],
             "prefix": "rime",
             "style": "camelCase"
           }
@@ -43,7 +85,10 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": ["element", "attribute"],
+            "type": [
+              "element",
+              "attribute"
+            ],
             "prefix": "rime",
             "style": "kebab-case"
           }
@@ -53,12 +98,45 @@
         "no-underscore-dangle": "off",
         "@angular-eslint/no-input-rename": "off",
         "no-duplicate-imports": "error",
+        "import/no-duplicates": "error",
+        "import/no-unused-modules": "error",
+        "import/order": [
+          "warn",
+          {
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": false
+            },
+            "newlines-between": "always",
+            "groups": [
+              "external",
+              "builtin",
+              "internal",
+              [
+                "parent",
+                "sibling",
+                "index"
+              ]
+            ],
+            "pathGroups": [
+              {
+                "pattern": "{@angular/**,rxjs,rxjs/operators}",
+                "group": "external",
+                "position": "before"
+              }
+            ]
+          }
+        ],
         "@typescript-eslint/naming-convention": [
           "error",
           {
             "selector": "classProperty",
-            "modifiers": ["private"],
-            "format": ["camelCase"],
+            "modifiers": [
+              "private"
+            ],
+            "format": [
+              "camelCase"
+            ],
             "leadingUnderscore": "allowSingleOrDouble"
           }
         ],
@@ -89,21 +167,64 @@
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/typescript"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/javascript"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.spec.js",
+        "*.spec.jsx"
+      ],
       "env": {
         "jest": true
       },
       "rules": {}
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "excludedFiles": [
+        "*inline-template-*.component.html"
+      ],
+      "extends": [
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "angular"
+          }
+        ]
+      }
     }
   ]
 }
